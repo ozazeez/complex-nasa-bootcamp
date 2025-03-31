@@ -12,7 +12,7 @@ function getTemperature() {
                 document.querySelector('table').appendChild(col)
                 let lat = data[i].location.latitude
                 let lon = data[i].location.longitude
-                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9cecef43acb52d2de11ead743237c55a&units=imperial`)
+                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=[your_key]&units=imperial`)
                     .then(res => res.json())
                     .then(data => {
                         console.log(data)
