@@ -5,13 +5,20 @@ function getTemperature() {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            for(let i = 0; i <= 10; i++ ){
+            for(let i = 0; i <= data.length; i++ ){
                 const col = document.createElement('tr')
                 col.innerHTML = `<td>${data[i].city}</td>
                 <td>${data[i].center}</td>`
-                document.querySelector('table').appendChild('col')
-                
-                    
+                document.querySelector('table').appendChild(col)
+                let lat = data[i].location.latitude
+                let lon = data[i].location.longitude
+                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9cecef43acb52d2de11ead743237c55a&units=imperial`)
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        col.innerHTML = col.innerHTML + `<td>${data.main.temp} F</td>`
+                    })
+                  
             }
             })
                 .catch(err => {
@@ -19,10 +26,3 @@ function getTemperature() {
                 })
         
 }
-
-// fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=9cecef43acb52d2de11ead743237c55a`)
-//                     .then(res => res.json())
-//                     .then(data =>
-//                         data.array.forEach(element => {
-
-//                         }))
